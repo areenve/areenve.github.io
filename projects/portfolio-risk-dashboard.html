@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Market Inefficiencies Pipeline · Arina</title>
+  <link rel="stylesheet" href="../assets/style.css"/>
+  <style>
+    .content {max-width: 900px;}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .kpi{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
+    .kpi b{display:block;font-size:18px}
+    .kpi span{color:var(--muted);font-size:13px}
+    .imgCard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.04)}
+    .imgCard img{width:100%;height:auto;display:block}
+    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.4}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .bullets{color:var(--muted);line-height:1.7}
+    @media (max-width:920px){.twoCol,.kpis{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="/">Arina</a>
+  <nav class="links">
+    <a href="/">Home</a>
+    <a class="active" href="../projects.html">Projects</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="container content">
+  <section class="section">
+    <h1>Market Inefficiencies Pipeline</h1>
+    <p class="subtitle">Dislocation detection with costs + liquidity constraints + signal storage</p>
+    <div class="cta">
+      <a class="btn" href="https://github.com/areenve/market-inefficiencies-pipeline" target="_blank" rel="noreferrer">GitHub Repo</a>
+      <a class="btn ghost" href="../projects.html">Back</a>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><b>Signals</b><span>add your # / day</span></div>
+      <div class="kpi"><b>Venues</b><span>add venues tracked</span></div>
+      <div class="kpi"><b>Costs model</b><span>fees + spread + slippage</span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Problem</h2>
+    <p class="lead">Prices can diverge briefly across venues. The challenge is filtering out non-executable “mirage” signals once realistic costs and liquidity are applied.</p>
+  </section>
+
+  <section class="section">
+    <h2>Approach</h2>
+    <ul class="bullets">
+      <li>Normalize symbols and align timestamps across sources.</li>
+      <li>Compute effective buy/sell prices with fees + spread + slippage assumptions.</li>
+      <li>Filter by liquidity/volume and execution constraints.</li>
+      <li>Log snapshots + signals for evaluation and backtesting.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Architecture</h2>
+    <div class="imgCard">
+      <img src="../assets/projects/mi_pipeline_arch.png" alt="Architecture diagram">
+      <div class="caption">Put a draw.io architecture diagram here.</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Results</h2>
+    <div class="twoCol">
+      <div class="imgCard">
+        <img src="../assets/projects/mi_pipeline_results.png" alt="Results chart">
+        <div class="caption">Example chart: implied profit after costs, or signal frequency.</div>
+      </div>
+      <div class="imgCard">
+        <img src="../assets/projects/mi_pipeline_ui.png" alt="Example output">
+        <div class="caption">Example output screenshot: table of top signals, logs, etc.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Tech Stack</h2>
+    <div class="tags">
+      <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Pandas</span><span class="tag">SQLite/BigQuery</span>
+    </div>
+  </section>
+
+  <footer class="footer">© <span id="year"></span> Arina Veprikova</footer>
+</main>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>
+
