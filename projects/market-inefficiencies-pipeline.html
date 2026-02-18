@@ -3,14 +3,45 @@
 <head>
   <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Market Inefficiencies Pipeline · Arina</title>
-  <p style="color: hotpink; font-weight: 700;">DEBUG: updated at 22:05</p>
   <link rel="stylesheet" href="../assets/style.css"/>
   <style>
     .content {max-width: 900px;}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-    .kpi{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
-    .kpi b{display:block;font-size:18px}
-    .kpi span{color:var(--muted);font-size:13px}
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+  margin-top:18px;
+}
+
+.kpi{
+  padding:16px 16px 14px;
+  border-radius:18px;
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+  backdrop-filter: blur(6px);
+}
+
+.kpi .kpiTitle{
+  font-size: 13px;
+  letter-spacing: .2px;
+  color: rgba(255,255,255,0.72);
+  margin-bottom: 8px;
+}
+
+.kpi .kpiValue{
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: rgba(255,255,255,0.96);
+  margin-bottom: 6px;
+}
+
+.kpi .kpiSub{
+  font-size: 14px;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.75);
+}
     .imgCard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.04)}
     .imgCard img{width:100%;height:auto;display:block}
     .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.4}
@@ -64,11 +95,25 @@
       <a class="btn ghost" href="../projects.html">Back</a>
     </div>
 
-    <div class="kpis">
-      <div class="stat-sub">201 detected dislocations (after costs)</div>
-      <div class="stat-sub">BITSTAMP • COINBASE • KRAKEN</div>
-      <div class="stat-sub">Total assumed costs: 6.0 bps (fees + spread + slippage)</div>
-    </div>
+<div class="kpis">
+  <div class="kpi">
+    <div class="kpiTitle">Signals</div>
+    <div class="kpiValue">201</div>
+    <div class="kpiSub">detected dislocations (after costs)</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpiTitle">Venues</div>
+    <div class="kpiValue">3</div>
+    <div class="kpiSub">BITSTAMP • COINBASE • KRAKEN</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpiTitle">Costs model</div>
+    <div class="kpiValue">6.0 bps</div>
+    <div class="kpiSub">fees + spread + slippage</div>
+  </div>
+</div>
   </section>
 
   <section class="section">
