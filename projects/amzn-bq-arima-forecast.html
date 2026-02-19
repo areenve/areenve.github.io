@@ -62,19 +62,15 @@
 </head>
 
 <body>
-  <!-- Top nav comes from your shared stylesheet layout -->
-  <header class="nav">
-    <div class="navInner">
-      <a class="brand" href="../index.html">Arina</a>
-      <nav class="navLinks">
-        <a href="../index.html">Home</a>
-        <a class="active" href="../projects.html">Projects</a>
-        <a href="../resume.html">Resume</a>
-        <a href="../contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
-
+<header class="nav">
+  <a class="brand" href="/">Arina</a>
+  <nav class="links">
+    <a href="/">Home</a>
+    <a class="active" href="../projects.html">Projects</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
   <main class="content">
     <h1>AMZN BigQuery ARIMA Forecast</h1>
     <p class="lead">Time-series forecasting workflow with BigQuery ARIMA + evaluation plots.</p>
@@ -126,32 +122,21 @@
       <li>Plot forecast vs actual and summarize error metrics.</li>
     </ul>
 
-    <h2 style="margin-top:26px;">Architecture</h2>
-    <div class="figure-wrap">
-      <!-- Replace this image when you generate an ARIMA architecture diagram -->
-      <img class="pretty-figure" src="../images/arima_architecture.png" alt="ARIMA architecture diagram">
-      <div class="figure-caption">BigQuery ML training + forecasting + evaluation export to website.</div>
-    </div>
+    <h2 style="margin-top:26px;">Model Output</h2>
+<div class="imgCard">
+  <img src="../images/amzn_forecast.png" alt="AMZN ARIMA forecast vs actual">
+  <div class="caption">
+    Forecast vs actual for AMZN using BigQuery ML ARIMA. The shaded band is the prediction interval;
+    performance is evaluated on a held-out period.
+  </div>
+</div>
+<h2>Forecast results</h2>
+<p class="lead">
+  The model is trained in BigQuery ML (ARIMA / auto-ARIMA) and evaluated on a held-out window to check
+  whether it generalizes beyond the training period. The figure below is the “sanity check” for the
+  entire pipeline: if the forecast tracks the true price and uncertainty is reasonable, the workflow is working.
+</p>
 
-    <h2 style="margin-top:26px;">Results</h2>
-    <div class="twoCol">
-      <div class="figure-wrap">
-        <!-- Replace with your real forecast plot image name -->
-        <img class="pretty-figure" src="../images/amzn_forecast.png" alt="AMZN forecast vs actual">
-        <div class="figure-caption">Forecast vs actual on the evaluation window.</div>
-      </div>
-
-      <div class="figure-wrap">
-        <!-- Replace with your real metrics/residual plot image name -->
-        <img class="pretty-figure" src="../images/amzn_metrics.png" alt="Error metrics / residual checks">
-        <div class="figure-caption">Error metrics + residual diagnostics to validate fit.</div>
-      </div>
-    </div>
-
-    <h2 style="margin-top:26px;">Notes</h2>
-    <p class="bullets">
-      Next: add a small table of model settings + evaluation metrics, and link to the exact BigQuery SQL used.
-    </p>
   </main>
 </body>
 </html>
