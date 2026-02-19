@@ -11,9 +11,6 @@
     .kpi{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
     .kpi b{display:block;font-size:20px;line-height:1.1}
     .kpi span{color:var(--muted);font-size:13px;line-height:1.35}
-    .imgCard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.04)}
-    .imgCard img{width:100%;height:auto;display:block}
-    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.45}
     .bullets{color:var(--muted);line-height:1.7}
     .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .metricTable{width:100%;border-collapse:collapse;font-size:14px}
@@ -73,8 +70,8 @@
 
   <section class="section">
     <h2>Results</h2>
-    <div class="imgCard">
-      <img src="../assets/projects/fractal_r2_by_horizon.png" alt="R2 by horizon for Elastic Net and OLS with and without multifractal features">
+    <div class="imgCard vizCard">
+      <img class="vizImage" src="../assets/projects/fractal_r2_by_horizon.png" alt="R2 by horizon for Elastic Net and OLS with and without multifractal features">
       <div class="caption">
         R² trends by horizon for OLS and Elastic Net baselines, with and without multifractal features.
         MF signals add small gains at 5-10 days and become neutral/slightly negative at 22 days.
@@ -82,12 +79,12 @@
     </div>
 
     <div class="twoCol" style="margin-top:14px;">
-      <div class="imgCard">
-        <img src="../assets/projects/fractal_mae_by_horizon.png" alt="MAE by horizon">
+      <div class="imgCard vizCard">
+        <img class="vizImage" src="../assets/projects/fractal_mae_by_horizon.png" alt="MAE by horizon">
         <div class="caption">MAE improves marginally with MF at short horizons.</div>
       </div>
-      <div class="imgCard">
-        <img src="../assets/projects/fractal_rmse_by_horizon.png" alt="RMSE by horizon">
+      <div class="imgCard vizCard">
+        <img class="vizImage" src="../assets/projects/fractal_rmse_by_horizon.png" alt="RMSE by horizon">
         <div class="caption">RMSE shows the same pattern: small short-horizon gains, limited long-horizon benefit.</div>
       </div>
     </div>
@@ -131,8 +128,8 @@
 
   <section class="section">
     <h2>Delta View (MF - Baseline)</h2>
-    <div class="imgCard">
-      <img src="../assets/projects/fractal_delta_by_horizon.svg" alt="Delta metrics by horizon comparing multifractal models to baselines for ENet and OLS">
+    <div class="imgCard vizCard">
+      <img class="vizImage" src="../assets/projects/fractal_delta_by_horizon.svg" alt="Delta metrics by horizon comparing multifractal models to baselines for ENet and OLS">
       <div class="caption">
         Direct lift view from the common-test metrics: multifractal features help slightly at 5-10 days, while 22-day gains are flat to negative.
       </div>

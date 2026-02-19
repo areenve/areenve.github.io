@@ -257,6 +257,29 @@ h2{
   color: rgba(255,255,255,0.75);
 }
 
+/* Consistent visual style for project charts/diagrams */
+.vizCard{
+  border: 1px solid rgba(255,255,255,0.16);
+  background: linear-gradient(180deg, rgba(24,31,49,0.96), rgba(16,22,36,0.96));
+  box-shadow: 0 20px 38px rgba(0,0,0,0.30);
+}
+.vizCard .vizImage{
+  width: 100%;
+  display: block;
+  height: auto;
+  padding: 16px;
+  background: #e6e6e8;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+.vizCard .caption,
+.vizCard .figure-caption{
+  margin-top: 0;
+  padding: 14px 16px;
+  background: rgba(8,12,20,0.92);
+  color: rgba(255,255,255,0.86);
+  line-height: 1.45;
+}
+
 .twoCol{
   display:grid;
   grid-template-columns: 1fr 1fr;
