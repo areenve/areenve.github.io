@@ -44,7 +44,7 @@ header.nav{
   z-index: 50;
   display:flex;
   align-items:center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 14px 22px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   background: rgba(8,10,15,0.55);
@@ -53,6 +53,7 @@ header.nav{
 .brand{
   font-weight: 700;
   color: var(--text);
+  display: none;
 }
 nav.links{
   display:flex;
