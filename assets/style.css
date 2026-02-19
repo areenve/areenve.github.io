@@ -1,139 +1,225 @@
-/* =========================================================
-   Case study layout normalization (MI-style)
-   Drop-in: makes AMZN / MI / Risk look consistent
-   ========================================================= */
+/* =========================
+   Global theme (dark)
+   ========================= */
 
-/* Global sizing baseline */
 :root{
-  --contentMax: 1120px;
-  --contentPad: 28px;
-  --heroGap: 16px;
-  --sectionGap: 26px;
-  --kpiGap: 14px;
-
-  /* Typography */
-  --h1Size: clamp(42px, 6vw, 72px);
-  --h2Size: clamp(28px, 3.2vw, 40px);
-  --leadSize: 18px;
-  --bodySize: 16px;
-   /* Safe defaults in case older CSS didn't define them */
+  --bg0: #0b0d12;
+  --bg1: #0f1420;
+  --panel: rgba(255,255,255,0.06);
+  --panel2: rgba(255,255,255,0.045);
+  --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.72);
   --border: rgba(255,255,255,0.12);
   --radius: 18px;
+  --shadow: 0 18px 40px rgba(0,0,0,0.35);
+  --accent: rgba(255,255,255,0.95);
+
+  --contentMax: 1100px;
+  --contentPad: 22px;
+
+  --h1Size: clamp(42px, 6vw, 72px);
+  --h2Size: clamp(28px, 3.2vw, 40px);
 }
 
-/* Make sure browser defaults don't blow up spacing */
-html, body{
-  margin: 0;
-  padding: 0;
-}
-
+*{ box-sizing: border-box; }
+html, body{ margin:0; padding:0; }
 body{
-  font-size: var(--bodySize);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  color: var(--text);
+  background: radial-gradient(1200px 700px at 15% 10%, rgba(122, 63, 255, 0.22), transparent 55%),
+              radial-gradient(900px 600px at 85% 25%, rgba(255, 79, 143, 0.16), transparent 55%),
+              linear-gradient(180deg, var(--bg0), var(--bg1));
   line-height: 1.55;
 }
 
-/* Shared "content" container: used by your case-study pages */
-.content{
+a{ color: var(--accent); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+
+/* =========================
+   Nav
+   ========================= */
+header.nav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(8,10,15,0.55);
+  backdrop-filter: blur(10px);
+}
+.brand{
+  font-weight: 700;
+  color: var(--text);
+}
+nav.links{
+  display:flex;
+  gap: 18px;
+}
+nav.links a{
+  color: rgba(255,255,255,0.78);
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+nav.links a.active{
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+}
+
+/* =========================
+   Layout containers
+   ========================= */
+main.container,
+main.content{
   max-width: var(--contentMax);
   margin: 0 auto;
-  padding: 0 var(--contentPad) 56px;
+  padding: 72px var(--contentPad) 96px;
 }
 
-/* Hero spacing (top area under nav) */
-.content > h1:first-child{
-  margin-top: 18px;       /* prevents huge top gap */
-  margin-bottom: 10px;
+/* =========================
+   Home hero / sections / cards
+   ========================= */
+.hero{
+  display:grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 18px;
+  align-items: start;
 }
-
-/* Normalize case-study title size everywhere */
-.content h1{
+h1{
   font-size: var(--h1Size);
   line-height: 1.04;
   letter-spacing: -0.02em;
+  margin: 0 0 10px;
 }
-
-/* Normalize section headers */
-.content h2{
-  font-size: var(--h2Size);
-  line-height: 1.12;
-  margin: 34px 0 10px;
-}
-
-/* Lead paragraph under title */
-.lead{
-  max-width: 780px;       /* keeps it like MI */
-  font-size: var(--leadSize);
-  line-height: 1.45;
-  margin: 0 0 14px;
+.subtitle{
   color: var(--muted);
+  margin: 0 0 10px;
+}
+.lead{
+  color: var(--muted);
+  max-width: 780px;
+  margin: 0 0 14px;
 }
 
-/* Buttons row (GitHub Repo / Back) spacing */
-.content .btnRow,
-.content .actions,
-.content .heroActions{
-  display: flex;
+.section{ margin-top: 28px; }
+.sectionHead{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+h2{
+  font-size: var(--h2Size);
+  margin: 0 0 10px;
+  line-height: 1.12;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+.card{
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.cardTop h3{ margin: 0 0 6px; }
+.cardTop p{ margin: 0; color: var(--muted); }
+
+.tags{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.tag{
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.80);
+}
+
+.footer{
+  margin-top: 42px;
+  color: rgba(255,255,255,0.55);
+  font-size: 13px;
+}
+
+.textLink{ color: rgba(255,255,255,0.85); }
+
+/* =========================
+   Buttons
+   ========================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  text-decoration: none;
+}
+.btn:hover{ background: rgba(255,255,255,0.11); text-decoration: none; }
+.btn.ghost{
+  background: rgba(255,255,255,0.04);
+}
+
+/* =========================
+   Case-study normalization
+   ========================= */
+.content > h1:first-child{
+  margin-top: 0;
+}
+
+.btnRow,
+.actions,
+.heroActions{
+  display:flex;
   gap: 12px;
   margin: 14px 0 18px;
   flex-wrap: wrap;
 }
 
-/* KPI grid baseline */
 .kpis{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--kpiGap);
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 16px;
   margin: 10px 0 26px;
 }
 
-/* KPI card */
 .kpi{
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
+  padding:16px 16px 14px;
   border-radius: var(--radius);
-  padding: 18px 18px 16px;
-  box-shadow: 0 12px 26px rgba(0,0,0,0.22);
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.28);
+  backdrop-filter: blur(6px);
 }
 
-/* KPI label */
-.kpi b{
-  display: block;
-  font-size: 14px;        /* small label like MI */
-  font-weight: 600;
+.kpiLabel, .kpiTitle{
+  font-size: 13px;
+  letter-spacing: .2px;
   color: rgba(255,255,255,0.72);
   margin-bottom: 8px;
 }
-
-/* KPI big value (optional: if you use <div class="kpiValue">) */
-.kpi .kpiValue{
-  font-size: 46px;
-  line-height: 1.0;
-  font-weight: 750;
-  letter-spacing: -0.02em;
-  margin: 0 0 8px;
+.kpiValue{
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: rgba(255,255,255,0.96);
+  margin-bottom: 6px;
+}
+.kpiSub{
+  font-size: 14px;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.75);
 }
 
-/* KPI description */
-.kpi span{
-  display: block;
-  font-size: 14px;        /* smaller than body */
-  line-height: 1.35;
-  color: var(--muted);
-}
-
-/* Lists & paragraphs spacing like MI */
-.content p{
-  margin: 10px 0 0;
-}
-.content ul{
-  margin: 10px 0 0 18px;
-}
-.content li{
-  margin: 6px 0;
-}
-
-/* Image card like MI */
 .imgCard{
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -142,43 +228,45 @@ body{
   box-shadow: 0 18px 34px rgba(0,0,0,0.24);
   margin-top: 14px;
 }
-
-/* Make images responsive + not overflow the container */
 .imgCard img,
 .content img{
   max-width: 100%;
   height: auto;
-  display: block;
+  display:block;
 }
 
-/* Caption under images */
-.caption{
-  padding: 12px 14px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: var(--muted);
+.figure-wrap{
+  padding: 14px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+.pretty-figure{
+  width: 100%;
+  display:block;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+.caption, .figure-caption{
+  margin-top: 10px;
+  padding: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.75);
 }
 
-/* Two-column blocks if you use them (optional) */
 .twoCol{
-  display: grid;
+  display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 16px;
 }
 
-/* Responsive collapse */
 @media (max-width: 980px){
-  :root{ --contentPad: 18px; }
+  .hero{ grid-template-columns: 1fr; }
+  .grid{ grid-template-columns: 1fr; }
   .kpis{ grid-template-columns: 1fr; }
   .twoCol{ grid-template-columns: 1fr; }
 }
-
-/* Make container + content pages share the same layout */
-main.container,
-main.content{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 72px 22px 96px;
-}
-
