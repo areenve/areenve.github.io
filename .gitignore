@@ -1,0 +1,12 @@
+
+# macOS
+.DS_Store
+public/.DS_Store
+
+# node
+package-lock.json
+
+# temp/local dev stuff (only if you don't actually use it for the site build)
+src/
+.DS_Store
+public/.DS_Store
