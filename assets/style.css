@@ -124,27 +124,31 @@ main.content{
 
 .contactRow{
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: flex-start;
-  gap: 42px;
+  gap: 72px;
   margin-top: 18px;
 }
-.contactRow > div{
-  margin-top: 18px;
+.contactText{
+  margin-top: 12px;
+  max-width: 760px;
+}
+.contactIntro{
+  margin-bottom: 22px;
 }
 .contactAvatar{
-  width: 168px;
-  height: 168px;
+  width: 184px;
+  height: 184px;
   border-radius: 9999px;
   object-fit: cover;
   object-position: center 24%;
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 12px 24px rgba(0,0,0,0.28);
   flex: 0 0 auto;
-  margin-top: 2px;
+  margin-top: 0;
 }
 main.container > h1 + .contactRow{
-  margin-top: 26px;
+  margin-top: 30px;
 }
 h1{
   font-size: var(--h1Size);
@@ -355,8 +359,8 @@ h2{
 @media (max-width: 980px){
   .hero{ grid-template-columns: 1fr; }
   .avatarWrap{ justify-self: start; width: 180px !important; height: 180px !important; }
-  .contactRow{ flex-direction: column; }
-  .contactRow > div{ margin-top: 10px; }
+  .contactRow{ flex-direction: column; gap: 18px; }
+  .contactText{ margin-top: 10px; }
   .contactAvatar{ width: 118px; height: 118px; margin-top: 2px; }
   .grid{ grid-template-columns: 1fr; }
   .kpis{ grid-template-columns: 1fr; }
