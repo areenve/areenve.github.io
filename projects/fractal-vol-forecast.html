@@ -1,21 +1,27 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Market Inefficiencies Pipeline · Arina</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Fractal Vol Forecast · Arina</title>
   <link rel="stylesheet" href="../assets/style.css?v=2"/>
   <style>
-    .content {max-width: 900px;}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .content{max-width:980px;}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
     .kpi{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
-    .kpi b{display:block;font-size:18px}
-    .kpi span{color:var(--muted);font-size:13px}
+    .kpi b{display:block;font-size:20px;line-height:1.1}
+    .kpi span{color:var(--muted);font-size:13px;line-height:1.35}
     .imgCard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.04)}
     .imgCard img{width:100%;height:auto;display:block}
-    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.4}
-    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.45}
     .bullets{color:var(--muted);line-height:1.7}
-    @media (max-width:920px){.twoCol,.kpis{grid-template-columns:1fr}}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .metricTable{width:100%;border-collapse:collapse;font-size:14px}
+    .metricTable th,.metricTable td{border-bottom:1px solid var(--border);padding:10px 8px;text-align:left}
+    .metricTable th{color:rgba(255,255,255,.95);font-weight:700}
+    .metricTable td{color:var(--muted)}
+    @media (max-width:980px){.kpis{grid-template-columns:1fr 1fr}}
+    @media (max-width:760px){.kpis,.twoCol{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -31,53 +37,104 @@
 
 <main class="container content">
   <section class="section">
-    <h1>Market Inefficiencies Pipeline</h1>
-    <p class="subtitle">Dislocation detection with costs + liquidity constraints + signal storage</p>
+    <h1>Fractal Vol Forecast</h1>
+    <p class="subtitle">Multifractal features for cross-sectional volatility forecasting on S&amp;P 500 names.</p>
+
     <div class="cta">
-      <a class="btn" href="https://github.com/areenve/market-inefficiencies-pipeline" target="_blank" rel="noreferrer">GitHub Repo</a>
+      <a class="btn" href="https://github.com/areenve/fractal-vol-forecast" target="_blank" rel="noreferrer">GitHub Repo</a>
       <a class="btn ghost" href="../projects.html">Back</a>
     </div>
 
     <div class="kpis">
-      <div class="kpi"><b>Signals</b><span>add your # / day</span></div>
-      <div class="kpi"><b>Venues</b><span>add venues tracked</span></div>
-      <div class="kpi"><b>Costs model</b><span>fees + spread + slippage</span></div>
+      <div class="kpi"><b>94,732</b><span>Common-test rows at 5-day horizon</span></div>
+      <div class="kpi"><b>5 / 10 / 22</b><span>Forecast horizons (trading days)</span></div>
+      <div class="kpi"><b>0.201</b><span>Best out-of-sample R² (22d, ENet baseline)</span></div>
+      <div class="kpi"><b>+0.00026</b><span>Best MF R² lift (5d, ENet + MF vs ENet)</span></div>
     </div>
   </section>
 
   <section class="section">
     <h2>Problem</h2>
-    <p class="lead">Prices can diverge briefly across venues. The challenge is filtering out non-executable “mirage” signals once realistic costs and liquidity are applied.</p>
+    <p class="lead">
+      Estimate forward log realized volatility across the S&amp;P 500 and test whether multifractal signals improve on a strong HAR-L baseline,
+      especially at shorter horizons where market microstructure effects are stronger.
+    </p>
   </section>
 
   <section class="section">
     <h2>Approach</h2>
     <ul class="bullets">
-      <li>Normalize symbols and align timestamps across sources.</li>
-      <li>Compute effective buy/sell prices with fees + spread + slippage assumptions.</li>
-      <li>Filter by liquidity/volume and execution constraints.</li>
-      <li>Log snapshots + signals for evaluation and backtesting.</li>
+      <li>Build panel data from WRDS/CRSP exports and compute forward log realized volatility targets.</li>
+      <li>Train HAR-L baselines with lagged volatility structure and leverage proxy terms.</li>
+      <li>Add multifractal features from MFDFA rolling windows: delta H, H(q=2), and tau-width.</li>
+      <li>Evaluate OLS and Elastic Net variants on a common out-of-sample test set with MAE, RMSE, and R².</li>
     </ul>
   </section>
 
   <section class="section">
-    <h2>Architecture</h2>
+    <h2>Results</h2>
     <div class="imgCard">
-      <img src="../assets/projects/mi_pipeline_arch.png" alt="Architecture diagram">
-      <div class="caption">Put a draw.io architecture diagram here.</div>
+      <img src="../assets/projects/fractal_r2_by_horizon.png" alt="R2 by horizon for Elastic Net and OLS with and without multifractal features">
+      <div class="caption">
+        R² trends by horizon for OLS and Elastic Net baselines, with and without multifractal features.
+        MF signals add small gains at 5-10 days and become neutral/slightly negative at 22 days.
+      </div>
+    </div>
+
+    <div class="twoCol" style="margin-top:14px;">
+      <div class="imgCard">
+        <img src="../assets/projects/fractal_mae_by_horizon.png" alt="MAE by horizon">
+        <div class="caption">MAE improves marginally with MF at short horizons.</div>
+      </div>
+      <div class="imgCard">
+        <img src="../assets/projects/fractal_rmse_by_horizon.png" alt="RMSE by horizon">
+        <div class="caption">RMSE shows the same pattern: small short-horizon gains, limited long-horizon benefit.</div>
+      </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Results</h2>
-    <div class="twoCol">
-      <div class="imgCard">
-        <img src="../assets/projects/mi_pipeline_results.png" alt="Results chart">
-        <div class="caption">Example chart: implied profit after costs, or signal frequency.</div>
-      </div>
-      <div class="imgCard">
-        <img src="../assets/projects/mi_pipeline_ui.png" alt="Example output">
-        <div class="caption">Example output screenshot: table of top signals, logs, etc.</div>
+    <h2>Metric Snapshot (ENet)</h2>
+    <div class="imgCard" style="padding:8px 12px;">
+      <table class="metricTable">
+        <thead>
+          <tr>
+            <th>Horizon</th>
+            <th>R² ENet baseline</th>
+            <th>R² ENet + MF</th>
+            <th>Delta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5d</td>
+            <td>0.12214</td>
+            <td>0.12240</td>
+            <td>+0.00026</td>
+          </tr>
+          <tr>
+            <td>10d</td>
+            <td>0.15400</td>
+            <td>0.15407</td>
+            <td>+0.00007</td>
+          </tr>
+          <tr>
+            <td>22d</td>
+            <td>0.20124</td>
+            <td>0.20062</td>
+            <td>-0.00062</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Delta View (MF - Baseline)</h2>
+    <div class="imgCard">
+      <img src="../assets/projects/fractal_delta_by_horizon.svg" alt="Delta metrics by horizon comparing multifractal models to baselines for ENet and OLS">
+      <div class="caption">
+        Direct lift view from the common-test metrics: multifractal features help slightly at 5-10 days, while 22-day gains are flat to negative.
       </div>
     </div>
   </section>
@@ -85,7 +142,12 @@
   <section class="section">
     <h2>Tech Stack</h2>
     <div class="tags">
-      <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Pandas</span><span class="tag">SQLite/BigQuery</span>
+      <span class="tag">R</span>
+      <span class="tag">Python</span>
+      <span class="tag">WRDS / CRSP</span>
+      <span class="tag">Elastic Net</span>
+      <span class="tag">MFDFA</span>
+      <span class="tag">Time Series</span>
     </div>
   </section>
 

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="700" viewBox="0 0 1800 700" role="img" aria-labelledby="title desc">
+  <title id="title">Fractal Feature Lift vs Baseline</title>
+  <desc id="desc">Delta metrics for ENet and OLS models at horizons 5, 10, and 22 days.</desc>
+  <defs>
+    <style>
+      .bg{fill:#0f1420}
+      .panel{fill:#131a2b;stroke:#2a3347;stroke-width:2}
+      .grid{stroke:#2a3347;stroke-width:1}
+      .zero{stroke:#9aa3b2;stroke-width:1.5}
+      .axis{fill:#d4dae5;font:24px ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+      .small{fill:#aeb8c8;font:20px ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+      .title{fill:#f2f4f8;font:700 34px ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+      .panelTitle{fill:#eaf0ff;font:600 24px ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+      .enet{fill:none;stroke:#64b5f6;stroke-width:5}
+      .ols{fill:none;stroke:#ffb74d;stroke-width:5}
+      .pointE{fill:#64b5f6}
+      .pointO{fill:#ffb74d}
+      .legend{fill:#d4dae5;font:22px ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1800" height="700"/>
+  <text class="title" x="60" y="58">Fractal Feature Lift vs Baseline (Common Test Set)</text>
+
+  <g transform="translate(60,90)">
+    <rect class="panel" x="0" y="0" width="540" height="510" rx="18"/>
+    <text class="panelTitle" x="24" y="42">Delta R² (MF - Baseline)</text>
+    <text class="small" x="24" y="72">Higher is better</text>
+    <line class="grid" x1="70" y1="150" x2="500" y2="150"/>
+    <line class="grid" x1="70" y1="250" x2="500" y2="250"/>
+    <line class="grid" x1="70" y1="350" x2="500" y2="350"/>
+    <line class="grid" x1="70" y1="450" x2="500" y2="450"/>
+    <line class="zero" x1="70" y1="300" x2="500" y2="300"/>
+    <line class="grid" x1="100" y1="110" x2="100" y2="470"/>
+    <line class="grid" x1="265" y1="110" x2="265" y2="470"/>
+    <line class="grid" x1="460" y1="110" x2="460" y2="470"/>
+    <polyline class="enet" points="100,271 265,288 460,340"/>
+    <polyline class="ols" points="100,212 265,230 460,315"/>
+    <circle class="pointE" cx="100" cy="271" r="7"/><circle class="pointE" cx="265" cy="288" r="7"/><circle class="pointE" cx="460" cy="340" r="7"/>
+    <circle class="pointO" cx="100" cy="212" r="7"/><circle class="pointO" cx="265" cy="230" r="7"/><circle class="pointO" cx="460" cy="315" r="7"/>
+    <text class="axis" x="88" y="500">5</text><text class="axis" x="252" y="500">10</text><text class="axis" x="447" y="500">22</text>
+  </g>
+
+  <g transform="translate(630,90)">
+    <rect class="panel" x="0" y="0" width="540" height="510" rx="18"/>
+    <text class="panelTitle" x="24" y="42">Delta MAE (MF - Baseline)</text>
+    <text class="small" x="24" y="72">Lower is better</text>
+    <line class="grid" x1="70" y1="150" x2="500" y2="150"/>
+    <line class="grid" x1="70" y1="250" x2="500" y2="250"/>
+    <line class="grid" x1="70" y1="350" x2="500" y2="350"/>
+    <line class="grid" x1="70" y1="450" x2="500" y2="450"/>
+    <line class="zero" x1="70" y1="300" x2="500" y2="300"/>
+    <line class="grid" x1="100" y1="110" x2="100" y2="470"/>
+    <line class="grid" x1="265" y1="110" x2="265" y2="470"/>
+    <line class="grid" x1="460" y1="110" x2="460" y2="470"/>
+    <polyline class="enet" points="100,330 265,302 460,286"/>
+    <polyline class="ols" points="100,390 265,360 460,310"/>
+    <circle class="pointE" cx="100" cy="330" r="7"/><circle class="pointE" cx="265" cy="302" r="7"/><circle class="pointE" cx="460" cy="286" r="7"/>
+    <circle class="pointO" cx="100" cy="390" r="7"/><circle class="pointO" cx="265" cy="360" r="7"/><circle class="pointO" cx="460" cy="310" r="7"/>
+    <text class="axis" x="88" y="500">5</text><text class="axis" x="252" y="500">10</text><text class="axis" x="447" y="500">22</text>
+  </g>
+
+  <g transform="translate(1200,90)">
+    <rect class="panel" x="0" y="0" width="540" height="510" rx="18"/>
+    <text class="panelTitle" x="24" y="42">Delta RMSE (MF - Baseline)</text>
+    <text class="small" x="24" y="72">Lower is better</text>
+    <line class="grid" x1="70" y1="150" x2="500" y2="150"/>
+    <line class="grid" x1="70" y1="250" x2="500" y2="250"/>
+    <line class="grid" x1="70" y1="350" x2="500" y2="350"/>
+    <line class="grid" x1="70" y1="450" x2="500" y2="450"/>
+    <line class="zero" x1="70" y1="300" x2="500" y2="300"/>
+    <line class="grid" x1="100" y1="110" x2="100" y2="470"/>
+    <line class="grid" x1="265" y1="110" x2="265" y2="470"/>
+    <line class="grid" x1="460" y1="110" x2="460" y2="470"/>
+    <polyline class="enet" points="100,334 265,307 460,282"/>
+    <polyline class="ols" points="100,396 265,366 460,294"/>
+    <circle class="pointE" cx="100" cy="334" r="7"/><circle class="pointE" cx="265" cy="307" r="7"/><circle class="pointE" cx="460" cy="282" r="7"/>
+    <circle class="pointO" cx="100" cy="396" r="7"/><circle class="pointO" cx="265" cy="366" r="7"/><circle class="pointO" cx="460" cy="294" r="7"/>
+    <text class="axis" x="88" y="500">5</text><text class="axis" x="252" y="500">10</text><text class="axis" x="447" y="500">22</text>
+  </g>
+
+  <g transform="translate(760,640)">
+    <line class="enet" x1="0" y1="0" x2="70" y2="0"/><text class="legend" x="86" y="8">ENet</text>
+    <line class="ols" x1="220" y1="0" x2="290" y2="0"/><text class="legend" x="306" y="8">OLS</text>
+  </g>
+</svg>
