@@ -125,20 +125,23 @@ main.content{
 .contactRow{
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
+  justify-content: flex-start;
+  gap: 42px;
+  margin-top: 18px;
+}
+.contactRow > div{
   margin-top: 18px;
 }
 .contactAvatar{
-  width: 136px;
-  height: 136px;
+  width: 168px;
+  height: 168px;
   border-radius: 9999px;
   object-fit: cover;
   object-position: center 24%;
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 12px 24px rgba(0,0,0,0.28);
   flex: 0 0 auto;
-  margin-top: 8px;
+  margin-top: 2px;
 }
 main.container > h1 + .contactRow{
   margin-top: 26px;
@@ -353,7 +356,8 @@ h2{
   .hero{ grid-template-columns: 1fr; }
   .avatarWrap{ justify-self: start; width: 180px !important; height: 180px !important; }
   .contactRow{ flex-direction: column; }
-  .contactAvatar{ width: 104px; height: 104px; margin-top: 2px; }
+  .contactRow > div{ margin-top: 10px; }
+  .contactAvatar{ width: 118px; height: 118px; margin-top: 2px; }
   .grid{ grid-template-columns: 1fr; }
   .kpis{ grid-template-columns: 1fr; }
   .twoCol{ grid-template-columns: 1fr; }
