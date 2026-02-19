@@ -131,6 +131,12 @@ h2{
 }
 .cardTop h3{ margin: 0 0 6px; }
 .cardTop p{ margin: 0; color: var(--muted); }
+.cardLinks{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 12px;
+}
 
 .tags{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .tag{
