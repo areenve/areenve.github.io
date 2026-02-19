@@ -1,142 +1,171 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>AMZN BigQuery ARIMA Forecast · Arina</title>
-  <link rel="stylesheet" href="../assets/style.css"/>
 
+  <!-- Shared site stylesheet (same as MI) -->
+  <link rel="stylesheet" href="../assets/style.css" />
+
+  <!-- Page-local styles: only for KPI layout + figure wrapper.
+       (Keeps the "old MI dark theme figure" look even if global CSS changes.) -->
   <style>
+    /* Keep content width consistent with MI */
     .content { max-width: 980px; }
 
+    /* MI-style KPI cards (label + big value + subline) */
     .kpis{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+      margin-bottom: 26px;
     }
     .kpi{
       background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 14px 16px;
-    }
-    .kpi b{display:block; font-size:18px; margin-bottom:6px;}
-    .kpi span{color:var(--muted); font-size:13px; line-height:1.35;}
-
-    .twoCol{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:14px;
-      margin-top:14px;
-    }
-
-    /* Pretty figure wrapper (uses the CSS you already started adding) */
-    .figure-wrap{
-      padding:14px;
-      border-radius:18px;
-      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 18px;
+      padding: 16px 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
-    .pretty-figure{
-      width:100%;
-      display:block;
-      border-radius:16px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.03);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    .kpiLabel{
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      margin-bottom: 8px;
+      letter-spacing: .2px;
     }
-    .figure-caption{
-      margin-top:10px;
-      font-size:0.95rem;
-      line-height:1.35;
-      color: rgba(255,255,255,0.75);
+    .kpiValue{
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.0;
+      color: rgba(255,255,255,0.95);
     }
-
-    .bullets{ color: var(--muted); line-height:1.7; }
-
+    .kpiSub{
+      margin-top: 10px;
+      color: rgba(255,255,255,0.70);
+      font-size: 14px;
+      line-height: 1.35;
+    }
     @media (max-width: 920px){
-      .twoCol, .kpis { grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
     }
+
+    /* Old MI "pretty figure" wrapper */
+    .figure-wrap {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      margin-top: 14px;
+      margin-bottom: 22px;
+    }
+    .pretty-figure {
+      width: 100%;
+      display: block;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+    .figure-caption {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    /* Small helpers */
+    .btnRow { display:flex; gap:12px; margin-top: 14px; margin-bottom: 12px; flex-wrap: wrap; }
+    .btnRow a { text-decoration:none; }
   </style>
 </head>
 
 <body>
-<header class="nav">
-  <a class="brand" href="/">Arina</a>
-  <nav class="links">
-    <a href="/">Home</a>
-    <a class="active" href="../projects.html">Projects</a>
-    <a href="../resume.html">Resume</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <!-- MI-style top nav -->
+  <header class="nav">
+    <a class="brand" href="/">Arina</a>
+    <nav class="links">
+      <a href="/">Home</a>
+      <a class="active" href="../projects.html">Projects</a>
+      <a href="../resume.html">Resume</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
+
   <main class="content">
     <h1>AMZN BigQuery ARIMA Forecast</h1>
-    <p class="lead">Time-series forecasting workflow with BigQuery ARIMA + evaluation plots.</p>
+    <p class="lead">Time-series forecasting workflow with BigQuery ML ARIMA + evaluation-ready plots for the website case study.</p>
 
-    <div class="row" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+    <div class="btnRow">
       <a class="btn" href="https://github.com/areenve/amzn-bq-arima-forecast" target="_blank" rel="noreferrer">GitHub Repo</a>
-      <a class="btn" href="../projects.html">Back</a>
+      <a class="btn ghost" href="../projects.html">Back</a>
     </div>
 
-    <!-- KPIs -->
-<!-- KPIs -->
-<div class="kpis">
-  <div class="kpi">
-    <div class="kpiTop">
-      <b>Dataset</b>
-      <div class="kpiValue">AMZN</div>
-    </div>
-    <div class="kpiSub">Price history in BigQuery (train + evaluation split)</div>
-  </div>
+    <!-- KPIs (MI-style layout like your second screenshot) -->
+    <div class="kpis">
+      <div class="kpi">
+        <div class="kpiLabel">Dataset</div>
+        <div class="kpiValue">AMZN</div>
+        <div class="kpiSub">Daily log returns pulled into BigQuery (train/eval split).</div>
+      </div>
 
-  <div class="kpi">
-    <div class="kpiTop">
-      <b>Model</b>
-      <div class="kpiValue">ARIMA</div>
-    </div>
-    <div class="kpiSub">BigQuery ML ARIMA (auto-ARIMA) + forecast horizon</div>
-  </div>
+      <div class="kpi">
+        <div class="kpiLabel">Model</div>
+        <div class="kpiValue">ARIMA</div>
+        <div class="kpiSub">BigQuery ML ARIMA (auto-ARIMA) trained in-warehouse.</div>
+      </div>
 
-  <div class="kpi">
-    <div class="kpiTop">
-      <b>Outputs</b>
-      <div class="kpiValue">MAE/RMSE</div>
+      <div class="kpi">
+        <div class="kpiLabel">Forecast horizon</div>
+        <div class="kpiValue">7 days</div>
+        <div class="kpiSub">Short-horizon forecast to validate end-to-end pipeline + reporting.</div>
+      </div>
     </div>
-    <div class="kpiSub">Forecast plot + error metrics + residual checks</div>
-  </div>
-</div>
 
-    <h2 style="margin-top:34px;">Problem</h2>
-    <p class="bullets">
+    <h2>Problem</h2>
+    <p>
       Build a reproducible forecasting pipeline where modeling runs in BigQuery, results are evaluated consistently,
       and visuals are publication-ready for the website case study.
     </p>
 
-    <h2 style="margin-top:26px;">Approach</h2>
+    <h2>Approach</h2>
     <ul class="bullets">
-      <li>Load and prepare AMZN time-series (frequency, missing values, train/test split).</li>
-      <li>Fit BigQuery ML ARIMA model (auto hyperparameters).</li>
-      <li>Generate forecasts + compare against holdout.</li>
-      <li>Plot forecast vs actual and summarize error metrics.</li>
+      <li>Ingest AMZN price history into BigQuery and compute daily log returns.</li>
+      <li>Fit BigQuery ML ARIMA (auto-ARIMA) on the training window.</li>
+      <li>Generate a 7-day forecast and export results for the website report.</li>
+      <li>Produce a clean forecast visualization to communicate the pipeline output.</li>
     </ul>
 
-    <h2 style="margin-top:26px;">Model Output</h2>
-<div class="imgCard">
-  <img src="../images/amzn_forecast.png" alt="AMZN ARIMA forecast vs actual">
-  <div class="caption">
-    Forecast vs actual for AMZN using BigQuery ML ARIMA. The shaded band is the prediction interval;
-    performance is evaluated on a held-out period.
-  </div>
-</div>
-<h2>Forecast results</h2>
-<p class="lead">
-  The model is trained in BigQuery ML (ARIMA / auto-ARIMA) and evaluated on a held-out window to check
-  whether it generalizes beyond the training period. The figure below is the “sanity check” for the
-  entire pipeline: if the forecast tracks the true price and uncertainty is reasonable, the workflow is working.
-</p>
+    <h2>Results</h2>
 
+    <div class="figure-wrap">
+      <!-- Put this file in your website repo:
+           assets/projects/amzn_forecast.png
+           (see curl command we used earlier to download it) -->
+      <img
+        class="pretty-figure"
+        src="../assets/projects/amzn_forecast.png"
+        alt="AMZN daily log returns with 7-day ARIMA forecast"
+      />
+      <div class="figure-caption">
+        <b>AMZN daily log returns: recent history + 7-day forecast.</b>
+        Blue shows realized daily log returns; the vertical dotted line marks the forecast start.
+        Orange is the ARIMA forecast for the next 7 trading days. This figure demonstrates the end-to-end
+        BigQuery ML forecasting pipeline output in a website-ready format.
+      </div>
+    </div>
+
+    <h2>What this project demonstrates</h2>
+    <ul class="bullets">
+      <li>BigQuery-first modeling workflow (no local model training required).</li>
+      <li>Clean separation between data prep, modeling SQL, and reporting outputs.</li>
+      <li>A single “hero” forecast figure for fast communication in a portfolio context.</li>
+    </ul>
+
+    <p style="margin-top:18px; color: rgba(255,255,255,0.65);">
+      Next upgrade (optional): add residual diagnostics + error metrics (MAE/RMSE) as additional figures/KPIs.
+    </p>
   </main>
 </body>
 </html>
