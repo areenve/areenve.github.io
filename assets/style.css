@@ -16,6 +16,10 @@
   --h2Size: clamp(28px, 3.2vw, 40px);
   --leadSize: 18px;
   --bodySize: 16px;
+   /* Safe defaults in case older CSS didn't define them */
+  --muted: rgba(255,255,255,0.72);
+  --border: rgba(255,255,255,0.12);
+  --radius: 18px;
 }
 
 /* Make sure browser defaults don't blow up spacing */
@@ -168,5 +172,13 @@ body{
   :root{ --contentPad: 18px; }
   .kpis{ grid-template-columns: 1fr; }
   .twoCol{ grid-template-columns: 1fr; }
+}
+
+/* Make container + content pages share the same layout */
+main.container,
+main.content{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 22px 96px;
 }
 

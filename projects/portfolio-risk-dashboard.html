@@ -1,28 +1,35 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Market Inefficiencies Pipeline · Arina</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Portfolio Risk Dashboard · Arina</title>
   <link rel="stylesheet" href="../assets/style.css"/>
+
   <style>
-    .content {max-width: 900px;}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+    .content{max-width:980px;}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px}
     .kpi{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
     .kpi b{display:block;font-size:18px}
     .kpi span{color:var(--muted);font-size:13px}
+
     .imgCard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.04)}
     .imgCard img{width:100%;height:auto;display:block}
-    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.4}
-    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.45}
+
     .bullets{color:var(--muted);line-height:1.7}
-    @media (max-width:920px){.twoCol,.kpis{grid-template-columns:1fr}}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:980px){.kpis{grid-template-columns:1fr 1fr}}
+    @media (max-width:760px){.twoCol{grid-template-columns:1fr}}
+    @media (max-width:640px){.kpis{grid-template-columns:1fr}}
   </style>
 </head>
+
 <body>
 <header class="nav">
-  <a class="brand" href="/">Arina</a>
+  <a class="brand" href="../index.html">Arina</a>
   <nav class="links">
-    <a href="/">Home</a>
+    <a href="../index.html">Home</a>
     <a class="active" href="../projects.html">Projects</a>
     <a href="../resume.html">Resume</a>
     <a href="../contact.html">Contact</a>
@@ -31,53 +38,61 @@
 
 <main class="container content">
   <section class="section">
-    <h1>Market Inefficiencies Pipeline</h1>
-    <p class="subtitle">Dislocation detection with costs + liquidity constraints + signal storage</p>
+    <h1>Portfolio Risk Dashboard</h1>
+    <p class="subtitle">Power BI dashboard for portfolio performance, risk metrics, and stress scenarios.</p>
+
     <div class="cta">
-      <a class="btn" href="https://github.com/areenve/market-inefficiencies-pipeline" target="_blank" rel="noreferrer">GitHub Repo</a>
+      <a class="btn" href="https://github.com/areenve/portfolio-risk-dashboard" target="_blank" rel="noreferrer">GitHub Repo</a>
       <a class="btn ghost" href="../projects.html">Back</a>
     </div>
 
+    <!-- KPIs taken from your screenshot -->
     <div class="kpis">
-      <div class="kpi"><b>Signals</b><span>add your # / day</span></div>
-      <div class="kpi"><b>Venues</b><span>add venues tracked</span></div>
-      <div class="kpi"><b>Costs model</b><span>fees + spread + slippage</span></div>
+      <div class="kpi"><b>93.27</b><span>Portfolio Value (Latest)</span></div>
+      <div class="kpi"><b>-0.21</b><span>Max Drawdown (to date)</span></div>
+      <div class="kpi"><b>0.53</b><span>Volatility (30D)</span></div>
+      <div class="kpi"><b>0.74</b><span>Beta vs Benchmark</span></div>
     </div>
   </section>
 
   <section class="section">
     <h2>Problem</h2>
-    <p class="lead">Prices can diverge briefly across venues. The challenge is filtering out non-executable “mirage” signals once realistic costs and liquidity are applied.</p>
+    <p class="lead">
+      Portfolio monitoring gets messy when performance, risk, and attribution live in different places.
+      This project consolidates them into one interactive view with consistent metrics and stress testing.
+    </p>
   </section>
 
   <section class="section">
-    <h2>Approach</h2>
+    <h2>What’s included</h2>
     <ul class="bullets">
-      <li>Normalize symbols and align timestamps across sources.</li>
-      <li>Compute effective buy/sell prices with fees + spread + slippage assumptions.</li>
-      <li>Filter by liquidity/volume and execution constraints.</li>
-      <li>Log snapshots + signals for evaluation and backtesting.</li>
+      <li><b>Filters:</b> date range + asset class + sector.</li>
+      <li><b>Performance:</b> portfolio value over time + daily returns.</li>
+      <li><b>Risk:</b> 30-day volatility, max drawdown, beta vs benchmark.</li>
+      <li><b>Attribution:</b> risk contribution (Top 10 holdings).</li>
+      <li><b>Stress testing:</b> portfolio value under historical shock windows.</li>
     </ul>
   </section>
 
+  <!-- MATCH YOUR SCREENSHOT: Overview image is under Architecture -->
   <section class="section">
     <h2>Architecture</h2>
     <div class="imgCard">
-      <img src="../assets/projects/mi_pipeline_arch.png" alt="Architecture diagram">
-      <div class="caption">Put a draw.io architecture diagram here.</div>
+      <img src="../assets/projects/risk_overview.png" alt="Power BI portfolio risk dashboard overview">
+      <div class="caption">
+        Dashboard overview: portfolio value, daily return &amp; 30D volatility, drawdown, risk contribution (Top 10),
+        plus KPI cards and slicers (date, asset_class, sector).
+      </div>
     </div>
   </section>
 
+  <!-- MATCH YOUR SCREENSHOT: Stress image is under Results (single card) -->
   <section class="section">
     <h2>Results</h2>
-    <div class="twoCol">
-      <div class="imgCard">
-        <img src="../assets/projects/mi_pipeline_results.png" alt="Results chart">
-        <div class="caption">Example chart: implied profit after costs, or signal frequency.</div>
-      </div>
-      <div class="imgCard">
-        <img src="../assets/projects/mi_pipeline_ui.png" alt="Example output">
-        <div class="caption">Example output screenshot: table of top signals, logs, etc.</div>
+    <div class="imgCard">
+      <img src="../assets/projects/risk_stress.png" alt="Portfolio value under stress scenarios">
+      <div class="caption">
+        Stress scenarios view: baseline vs historical shock windows (COVID crash, worst 30 trading days, 2022 drawdown).
       </div>
     </div>
   </section>
@@ -85,7 +100,10 @@
   <section class="section">
     <h2>Tech Stack</h2>
     <div class="tags">
-      <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Pandas</span><span class="tag">SQLite/BigQuery</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">ETL</span>
     </div>
   </section>
 
