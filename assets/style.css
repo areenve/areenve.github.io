@@ -89,11 +89,10 @@ main.content{
 }
 .avatarWrap{
   position: relative;
-  width: 100%;
-  max-width: 340px;
-  aspect-ratio: 4 / 5;
+  width: 260px;
+  height: 260px;
   justify-self: end;
-  border-radius: 24px;
+  border-radius: 50%;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.14);
   background: rgba(255,255,255,0.04);
@@ -326,7 +325,7 @@ h2{
 
 @media (max-width: 980px){
   .hero{ grid-template-columns: 1fr; }
-  .avatarWrap{ justify-self: start; max-width: 300px; }
+  .avatarWrap{ justify-self: start; width: 220px; height: 220px; }
   .grid{ grid-template-columns: 1fr; }
   .kpis{ grid-template-columns: 1fr; }
   .twoCol{ grid-template-columns: 1fr; }
