@@ -85,20 +85,32 @@
     </div>
 
     <!-- KPIs -->
-    <div class="kpis">
-      <div class="kpi">
-        <b>Dataset</b>
-        <span>AMZN price history in BigQuery (training + evaluation split).</span>
-      </div>
-      <div class="kpi">
-        <b>Model</b>
-        <span>BigQuery ML ARIMA (auto ARIMA) + forecast horizon.</span>
-      </div>
-      <div class="kpi">
-        <b>Outputs</b>
-        <span>Forecast plot + error metrics (MAE/RMSE) + residual checks.</span>
-      </div>
+<!-- KPIs -->
+<div class="kpis">
+  <div class="kpi">
+    <div class="kpiTop">
+      <b>Dataset</b>
+      <div class="kpiValue">AMZN</div>
     </div>
+    <div class="kpiSub">Price history in BigQuery (train + evaluation split)</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpiTop">
+      <b>Model</b>
+      <div class="kpiValue">ARIMA</div>
+    </div>
+    <div class="kpiSub">BigQuery ML ARIMA (auto-ARIMA) + forecast horizon</div>
+  </div>
+
+  <div class="kpi">
+    <div class="kpiTop">
+      <b>Outputs</b>
+      <div class="kpiValue">MAE/RMSE</div>
+    </div>
+    <div class="kpiSub">Forecast plot + error metrics + residual checks</div>
+  </div>
+</div>
 
     <h2 style="margin-top:34px;">Problem</h2>
     <p class="bullets">

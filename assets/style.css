@@ -60,6 +60,52 @@ h1{font-size:44px; margin:0 0 6px}
   display:flex; flex-direction:column; gap:10px;
   min-height:170px;
 }
+/* KPI cards (MI-style) */
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:18px;
+}
+
+.kpi{
+  background:rgba(255,255,255,.05);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px 16px;
+}
+
+.kpiTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.kpi b{
+  display:block;
+  font-size:14px;
+  color:var(--muted);
+  letter-spacing:.2px;
+}
+
+.kpiValue{
+  font-size:34px;
+  font-weight:800;
+  line-height:1;
+}
+
+.kpiSub{
+  margin-top:8px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.35;
+}
+
+@media (max-width: 920px){
+  .kpis{ grid-template-columns:1fr; }
+}
+
 .card h3{margin:0 0 6px; font-size:18px}
 .card p{
   margin:0;
