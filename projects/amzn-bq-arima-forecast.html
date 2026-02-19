@@ -1,98 +1,146 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Market Inefficiencies Pipeline · Arina</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AMZN BigQuery ARIMA Forecast · Arina</title>
   <link rel="stylesheet" href="../assets/style.css"/>
+
   <style>
-    .content {max-width: 900px;}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
-    .kpi{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:var(--radius);padding:12px}
-    .kpi b{display:block;font-size:18px}
-    .kpi span{color:var(--muted);font-size:13px}
-    .imgCard{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.04)}
-    .imgCard img{width:100%;height:auto;display:block}
-    .caption{padding:10px 12px;color:var(--muted);font-size:13px;line-height:1.4}
-    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
-    .bullets{color:var(--muted);line-height:1.7}
-    @media (max-width:920px){.twoCol,.kpis{grid-template-columns:1fr}}
+    .content { max-width: 980px; }
+
+    .kpis{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+    .kpi{
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px 16px;
+    }
+    .kpi b{display:block; font-size:18px; margin-bottom:6px;}
+    .kpi span{color:var(--muted); font-size:13px; line-height:1.35;}
+
+    .twoCol{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    /* Pretty figure wrapper (uses the CSS you already started adding) */
+    .figure-wrap{
+      padding:14px;
+      border-radius:18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .pretty-figure{
+      width:100%;
+      display:block;
+      border-radius:16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+    .figure-caption{
+      margin-top:10px;
+      font-size:0.95rem;
+      line-height:1.35;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .bullets{ color: var(--muted); line-height:1.7; }
+
+    @media (max-width: 920px){
+      .twoCol, .kpis { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
+
 <body>
-<header class="nav">
-  <a class="brand" href="/">Arina</a>
-  <nav class="links">
-    <a href="/">Home</a>
-    <a class="active" href="../projects.html">Projects</a>
-    <a href="../resume.html">Resume</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <!-- Top nav comes from your shared stylesheet layout -->
+  <header class="nav">
+    <div class="navInner">
+      <a class="brand" href="../index.html">Arina</a>
+      <nav class="navLinks">
+        <a href="../index.html">Home</a>
+        <a class="active" href="../projects.html">Projects</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<main class="container content">
-  <section class="section">
-    <h1>Market Inefficiencies Pipeline</h1>
-    <p class="subtitle">Dislocation detection with costs + liquidity constraints + signal storage</p>
-    <div class="cta">
-      <a class="btn" href="https://github.com/areenve/market-inefficiencies-pipeline" target="_blank" rel="noreferrer">GitHub Repo</a>
-      <a class="btn ghost" href="../projects.html">Back</a>
+  <main class="content">
+    <h1>AMZN BigQuery ARIMA Forecast</h1>
+    <p class="lead">Time-series forecasting workflow with BigQuery ARIMA + evaluation plots.</p>
+
+    <div class="row" style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn" href="https://github.com/areenve/amzn-bq-arima-forecast" target="_blank" rel="noreferrer">GitHub Repo</a>
+      <a class="btn" href="../projects.html">Back</a>
     </div>
 
+    <!-- KPIs -->
     <div class="kpis">
-      <div class="kpi"><b>Signals</b><span>add your # / day</span></div>
-      <div class="kpi"><b>Venues</b><span>add venues tracked</span></div>
-      <div class="kpi"><b>Costs model</b><span>fees + spread + slippage</span></div>
+      <div class="kpi">
+        <b>Dataset</b>
+        <span>AMZN price history in BigQuery (training + evaluation split).</span>
+      </div>
+      <div class="kpi">
+        <b>Model</b>
+        <span>BigQuery ML ARIMA (auto ARIMA) + forecast horizon.</span>
+      </div>
+      <div class="kpi">
+        <b>Outputs</b>
+        <span>Forecast plot + error metrics (MAE/RMSE) + residual checks.</span>
+      </div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2>Problem</h2>
-    <p class="lead">Prices can diverge briefly across venues. The challenge is filtering out non-executable “mirage” signals once realistic costs and liquidity are applied.</p>
-  </section>
+    <h2 style="margin-top:34px;">Problem</h2>
+    <p class="bullets">
+      Build a reproducible forecasting pipeline where modeling runs in BigQuery, results are evaluated consistently,
+      and visuals are publication-ready for the website case study.
+    </p>
 
-  <section class="section">
-    <h2>Approach</h2>
+    <h2 style="margin-top:26px;">Approach</h2>
     <ul class="bullets">
-      <li>Normalize symbols and align timestamps across sources.</li>
-      <li>Compute effective buy/sell prices with fees + spread + slippage assumptions.</li>
-      <li>Filter by liquidity/volume and execution constraints.</li>
-      <li>Log snapshots + signals for evaluation and backtesting.</li>
+      <li>Load and prepare AMZN time-series (frequency, missing values, train/test split).</li>
+      <li>Fit BigQuery ML ARIMA model (auto hyperparameters).</li>
+      <li>Generate forecasts + compare against holdout.</li>
+      <li>Plot forecast vs actual and summarize error metrics.</li>
     </ul>
-  </section>
 
-  <section class="section">
-    <h2>Architecture</h2>
-    <div class="imgCard">
-      <img src="../assets/projects/mi_pipeline_arch.png" alt="Architecture diagram">
-      <div class="caption">Put a draw.io architecture diagram here.</div>
+    <h2 style="margin-top:26px;">Architecture</h2>
+    <div class="figure-wrap">
+      <!-- Replace this image when you generate an ARIMA architecture diagram -->
+      <img class="pretty-figure" src="../images/arima_architecture.png" alt="ARIMA architecture diagram">
+      <div class="figure-caption">BigQuery ML training + forecasting + evaluation export to website.</div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2>Results</h2>
+    <h2 style="margin-top:26px;">Results</h2>
     <div class="twoCol">
-      <div class="imgCard">
-        <img src="../assets/projects/mi_pipeline_results.png" alt="Results chart">
-        <div class="caption">Example chart: implied profit after costs, or signal frequency.</div>
+      <div class="figure-wrap">
+        <!-- Replace with your real forecast plot image name -->
+        <img class="pretty-figure" src="../images/amzn_forecast.png" alt="AMZN forecast vs actual">
+        <div class="figure-caption">Forecast vs actual on the evaluation window.</div>
       </div>
-      <div class="imgCard">
-        <img src="../assets/projects/mi_pipeline_ui.png" alt="Example output">
-        <div class="caption">Example output screenshot: table of top signals, logs, etc.</div>
+
+      <div class="figure-wrap">
+        <!-- Replace with your real metrics/residual plot image name -->
+        <img class="pretty-figure" src="../images/amzn_metrics.png" alt="Error metrics / residual checks">
+        <div class="figure-caption">Error metrics + residual diagnostics to validate fit.</div>
       </div>
     </div>
-  </section>
 
-  <section class="section">
-    <h2>Tech Stack</h2>
-    <div class="tags">
-      <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Pandas</span><span class="tag">SQLite/BigQuery</span>
-    </div>
-  </section>
-
-  <footer class="footer">© <span id="year"></span> Arina Veprikova</footer>
-</main>
-
-<script src="../assets/main.js"></script>
+    <h2 style="margin-top:26px;">Notes</h2>
+    <p class="bullets">
+      Next: add a small table of model settings + evaluation metrics, and link to the exact BigQuery SQL used.
+    </p>
+  </main>
 </body>
 </html>
 
