@@ -127,16 +127,21 @@ main.content{
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
+  margin-top: 18px;
 }
 .contactAvatar{
-  width: 120px;
-  height: 120px;
+  width: 136px;
+  height: 136px;
   border-radius: 9999px;
   object-fit: cover;
-  object-position: center 28%;
+  object-position: center 24%;
   border: 1px solid rgba(255,255,255,0.16);
   box-shadow: 0 12px 24px rgba(0,0,0,0.28);
   flex: 0 0 auto;
+  margin-top: 8px;
+}
+main.container > h1 + .contactRow{
+  margin-top: 26px;
 }
 h1{
   font-size: var(--h1Size);
@@ -348,7 +353,7 @@ h2{
   .hero{ grid-template-columns: 1fr; }
   .avatarWrap{ justify-self: start; width: 180px !important; height: 180px !important; }
   .contactRow{ flex-direction: column; }
-  .contactAvatar{ width: 96px; height: 96px; }
+  .contactAvatar{ width: 104px; height: 104px; margin-top: 2px; }
   .grid{ grid-template-columns: 1fr; }
   .kpis{ grid-template-columns: 1fr; }
   .twoCol{ grid-template-columns: 1fr; }
