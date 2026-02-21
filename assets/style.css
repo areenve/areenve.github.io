@@ -632,6 +632,23 @@ h2{
   font-size: 0.95rem;
 }
 
+#exp-panel-tutor .lead{
+  margin-bottom: 10px;
+  max-width: 66ch;
+}
+
+#exp-panel-tutor .accordion-list{
+  margin-top: 6px;
+}
+
+#exp-panel-tutor .tags{
+  margin-top: 14px;
+}
+
+#exp-panel-tutor .proof-links{
+  margin-top: 12px;
+}
+
 .timeline-trigger{
   font-size: 1.06rem;
 }
