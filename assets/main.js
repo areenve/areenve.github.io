@@ -128,7 +128,7 @@
   function initTimelineAccordion() {
     const root = document.querySelector('[data-accordion="timeline"]');
     if (!root) return;
-    initAccordion(root, { closeOthers: true });
+    initAccordion(root, { closeOthers: false });
   }
 
   initReveal();

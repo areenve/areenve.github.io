@@ -486,6 +486,20 @@ h2{
   white-space: nowrap;
 }
 
+.more-projects-row{
+  display: flex;
+  margin: 8px 0 14px;
+}
+
+.more-projects-row.bottom{
+  margin: 16px 0 4px;
+}
+
+.more-projects-btn{
+  min-width: 210px;
+  justify-content: center;
+}
+
 .signals-grid{
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
