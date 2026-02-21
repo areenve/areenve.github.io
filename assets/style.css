@@ -519,17 +519,18 @@ h2{
 }
 
 .accordion-panel{
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.25s ease;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.28s ease, opacity 0.2s ease;
 }
 
 .accordion-item.is-open .accordion-panel{
-  grid-template-rows: 1fr;
+  max-height: 2200px;
+  opacity: 1;
 }
 
 .accordion-inner{
-  overflow: hidden;
   padding: 0 16px 16px;
 }
 
