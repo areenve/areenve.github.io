@@ -484,6 +484,7 @@ h2{
 
 .more-projects-top{
   white-space: nowrap;
+  display: none !important;
 }
 
 .more-projects-row{
