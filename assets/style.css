@@ -482,6 +482,10 @@ h2{
   gap: 18px;
 }
 
+.more-projects-top{
+  white-space: nowrap;
+}
+
 .signals-grid{
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
