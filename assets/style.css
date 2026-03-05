@@ -395,6 +395,35 @@ h2{
   max-width: 940px;
 }
 
+.intro-center{
+  max-width: 980px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.intro-center h1{
+  margin-bottom: 12px;
+}
+
+.intro-summary{
+  margin: 0 auto 14px;
+  max-width: 860px;
+  color: var(--muted);
+  font-size: clamp(18px, 2.2vw, 28px);
+  line-height: 1.35;
+}
+
+.intro-center .split-cta,
+.intro-center .email-link{
+  justify-content: center;
+}
+
+.intro-center .email-link{
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .eyebrow{
   margin: 0 0 10px;
   font-size: 12px;
