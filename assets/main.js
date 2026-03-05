@@ -89,9 +89,9 @@
         link2: { label: "Multifractal Forecasting", href: "projects/fractal-vol-forecast.html" }
       },
       bi: {
-        text: "I prove this through dashboard modeling, KPI design, and traceable data flows in portfolio analytics.",
+        text: "I prove this through dashboard modeling, KPI design, and traceable scoring frameworks for risk and readiness.",
         link1: { label: "Portfolio Risk Dashboard", href: "projects/portfolio-risk-dashboard.html" },
-        link2: { label: "All Projects", href: "projects.html" }
+        link2: { label: "Change Adoption Pulse", href: "projects/change-adoption-pulse.html" }
       },
       markets: {
         text: "I prove this by quantifying market frictions/dislocations and communicating risk behavior with stress views.",
@@ -104,9 +104,9 @@
         link2: { label: "Market Inefficiency Finder", href: "projects/market-inefficiencies-pipeline.html" }
       },
       communication: {
-        text: "I prove this by converting technical outputs into clear dashboards, concise write-ups, and recruiter-ready summaries.",
-        link1: { label: "Portfolio Risk Dashboard", href: "projects/portfolio-risk-dashboard.html" },
-        link2: { label: "Experience", href: "experience.html" }
+        text: "I prove this by turning metrics into stakeholder-facing narratives: readiness status, risk bands, and clear next actions.",
+        link1: { label: "Change Adoption Pulse", href: "projects/change-adoption-pulse.html" },
+        link2: { label: "Portfolio Risk Dashboard", href: "projects/portfolio-risk-dashboard.html" }
       }
     };
 
