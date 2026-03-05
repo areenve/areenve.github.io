@@ -6,16 +6,13 @@
   <link rel="stylesheet" href="../assets/style.css?v=28"/>
   <style>
     .content {max-width: 900px;}
-    /* Convert existing dark chart exports to a light visual treatment */
+    /* Use pre-rendered light charts */
     .vizCard .vizImage{
-      filter: invert(1) hue-rotate(180deg) saturate(0.9) contrast(1.06);
+      filter: none !important;
       background: #eef2f8 !important;
       padding: 0 !important;
       border-bottom: 0 !important;
       border-radius: 10px;
-      /* mask dark edge frames embedded in image exports */
-      outline: 18px solid #eef2f8;
-      outline-offset: -18px;
     }
 .kpis{
   display:grid;
@@ -129,7 +126,7 @@
   <section class="section">
     <h2>Architecture</h2>
     <div class="imgCard vizCard">
-      <img class="vizImage" src="../public/images/spread_hist_zoom_0_6.png" alt="Bid–ask spread (0–6 bps)">
+      <img class="vizImage" src="../public/images/spread_hist_zoom_0_6_light.png" alt="Bid–ask spread (0–6 bps)">
       <div class="caption">Baseline liquidity: bid–ask spread distribution across venues (zoomed 0–6 bps).</div>
     </div>
   </section>
@@ -138,17 +135,17 @@
     <h2>Results</h2>
     <div class="twoCol">
       <div class="imgCard vizCard">
-        <img class="vizImage" src="../public/images/net_edge_dist.png" alt="Net edge after costs distribution">
+        <img class="vizImage" src="../public/images/net_edge_dist_light.png" alt="Net edge after costs distribution">
         <div class="caption">Net edge after costs (fees + slippage) for cross-venue signals: max(bid) − min(ask).</div>
       </div>
       <div class="imgCard vizCard">
-        <img class="vizImage" src="../public/images/top_signals_table.png" alt="Top signals table">
+        <img class="vizImage" src="../public/images/top_signals_table_light.png" alt="Top signals table">
         <div class="caption">Example output: top ranked signals with buy/sell venues and gross vs net edge (bps).</div>
       </div>
     </div>
   </section>
 <div class="imgCard vizCard" style="margin-top: 16px;">
-  <img class="vizImage" src="../public/images/venue_pair_counts.png" alt="Venue pair counts">
+  <img class="vizImage" src="../public/images/venue_pair_counts_light.png" alt="Venue pair counts">
   <div class="caption">Signals by venue pair (buy → sell): which exchanges generate most opportunities.</div>
 </div>
 
