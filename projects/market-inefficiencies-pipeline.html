@@ -3,9 +3,15 @@
 <head>
   <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Market Inefficiencies Pipeline · Arina</title>
-  <link rel="stylesheet" href="../assets/style.css?v=26"/>
+  <link rel="stylesheet" href="../assets/style.css?v=27"/>
   <style>
     .content {max-width: 900px;}
+    /* Convert existing dark chart exports to a light visual treatment */
+    .vizImage{
+      filter: invert(1) hue-rotate(180deg) saturate(0.9) contrast(1.06);
+      background: #ffffff;
+      border-radius: 10px;
+    }
 .kpis{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));

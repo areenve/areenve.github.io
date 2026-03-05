@@ -407,10 +407,11 @@ h2{
 
 .intro-summary{
   margin: 0 auto 14px;
-  max-width: 860px;
+  max-width: 760px;
   color: var(--muted);
-  font-size: clamp(18px, 2.2vw, 28px);
-  line-height: 1.35;
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.42;
+  text-wrap: balance;
 }
 
 .intro-center .split-cta,
