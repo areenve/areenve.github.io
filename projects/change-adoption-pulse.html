@@ -263,6 +263,37 @@
 </main>
 
 <script src="../assets/main.js"></script>
+<script id="embeddedCsvData" type="text/plain">week,department,impacted_users,impact_level (Low/Medium/High),awareness_score (1-5),understanding_score (1-5),confidence_score (1-5),perceived_benefit_score (1-5),"resistance_signal_score (1-5, higher = worse)",training_completion_pct (0-100),workshop_attendance_pct (0-100),comms_open_rate_pct (0-100),manager_briefing_completed (0/1),open_risks,open_issues,milestone_status (On Track / At Risk / Delayed),"top_concern_theme (Training, Workload, Process Clarity, System Usability, Benefits Unclear)"
+1,Claims,120,High,2,2,2,2,4,35,40,52,0,4,5,At Risk,Training
+1,Customer Service,95,High,2,2,2,2,4,30,38,55,0,3,4,At Risk,Workload
+1,Driver Licensing Support,80,Medium,2,2,2,2,3,32,35,58,0,3,4,At Risk,Process Clarity
+1,IT Support,45,Medium,3,4,3,3,2,45,50,64,1,1,2,On Track,System Usability
+1,Team Leads / Operations,30,Medium,3,3,2,3,3,40,44,61,1,2,3,At Risk,Benefits Unclear
+2,Claims,120,High,2,2,2,2,4,42,48,54,0,4,5,At Risk,Training
+2,Customer Service,95,High,2,2,2,2,4,38,44,57,0,3,4,At Risk,Workload
+2,Driver Licensing Support,80,Medium,2,2,2,2,4,40,42,60,0,3,4,At Risk,Process Clarity
+2,IT Support,45,Medium,3,4,3,3,2,55,58,67,1,1,2,On Track,System Usability
+2,Team Leads / Operations,30,Medium,3,3,3,3,3,48,53,63,1,2,3,On Track,Workload
+3,Claims,120,High,3,3,2,3,4,55,62,58,1,3,4,At Risk,Training
+3,Customer Service,95,High,3,3,3,3,3,52,60,62,1,2,3,On Track,Workload
+3,Driver Licensing Support,80,Medium,3,3,2,2,4,50,57,61,0,3,4,At Risk,Process Clarity
+3,IT Support,45,Medium,4,4,4,4,2,68,72,70,1,1,1,On Track,System Usability
+3,Team Leads / Operations,30,Medium,3,4,3,3,3,60,65,66,1,2,2,On Track,Benefits Unclear
+4,Claims,120,High,3,3,3,3,4,63,70,60,1,3,4,At Risk,Workload
+4,Customer Service,95,High,3,4,3,3,3,66,72,68,1,2,2,On Track,Process Clarity
+4,Driver Licensing Support,80,Medium,3,3,2,2,4,58,63,62,0,3,4,At Risk,System Usability
+4,IT Support,45,Medium,4,4,4,4,2,78,80,74,1,1,1,On Track,Process Clarity
+4,Team Leads / Operations,30,Medium,4,4,3,4,2,70,75,69,1,1,2,On Track,Benefits Unclear
+5,Claims,120,High,3,3,3,3,4,68,74,59,1,3,4,Delayed,Training
+5,Customer Service,95,High,4,4,4,4,3,78,81,72,1,1,2,On Track,Benefits Unclear
+5,Driver Licensing Support,80,Medium,3,3,2,2,4,62,66,58,0,4,5,Delayed,Process Clarity
+5,IT Support,45,Medium,4,5,4,4,2,85,86,78,1,1,1,On Track,System Usability
+5,Team Leads / Operations,30,Medium,4,4,4,4,2,76,79,71,1,1,1,On Track,Workload
+6,Claims,120,High,4,3,3,3,4,68,78,61,1,3,4,At Risk,Workload
+6,Customer Service,95,High,4,4,4,4,2,84,87,76,1,1,1,On Track,System Usability
+6,Driver Licensing Support,80,Medium,3,3,2,3,4,66,70,57,0,4,5,Delayed,Process Clarity
+6,IT Support,45,Medium,5,5,4,5,1,90,91,82,1,0,1,On Track,System Usability
+6,Team Leads / Operations,30,Medium,4,4,4,4,2,82,84,74,1,1,1,On Track,Training</script>
 <script>
   function parseCsv(text){
     const rows = [];
@@ -363,6 +394,10 @@
       } catch (e) {
         // Try next candidate path.
       }
+    }
+    const embedded = document.getElementById("embeddedCsvData");
+    if (embedded && embedded.textContent && embedded.textContent.trim().length > 0) {
+      return embedded.textContent.trim();
     }
     throw new Error("CSV could not be loaded from known paths.");
   }
