@@ -43,13 +43,14 @@
     .deckWrap{position:relative}
     .deckViewport{
       display:flex;
-      gap:12px;
+      gap:0;
       overflow-x:auto;
       scroll-snap-type:x mandatory;
       padding-bottom:6px;
       scrollbar-width:thin;
     }
     .deckSlide{
+      flex:0 0 100%;
       min-width:100%;
       scroll-snap-align:start;
       background:rgba(255,255,255,.9);
@@ -423,12 +424,23 @@
   const prev = document.getElementById("deckPrev");
   const next = document.getElementById("deckNext");
   if (deck && prev && next) {
-    const move = (dir) => {
-      const step = deck.clientWidth;
-      deck.scrollBy({ left: dir * step, behavior: "smooth" });
+    const slides = Array.from(deck.querySelectorAll(".deckSlide"));
+    let slideIndex = 0;
+
+    const goTo = (idx) => {
+      slideIndex = Math.max(0, Math.min(slides.length - 1, idx));
+      deck.scrollTo({ left: slideIndex * deck.clientWidth, behavior: "smooth" });
     };
-    prev.addEventListener("click", () => move(-1));
-    next.addEventListener("click", () => move(1));
+
+    const syncIndexFromScroll = () => {
+      if (!deck.clientWidth) return;
+      slideIndex = Math.round(deck.scrollLeft / deck.clientWidth);
+    };
+
+    prev.addEventListener("click", () => goTo(slideIndex - 1));
+    next.addEventListener("click", () => goTo(slideIndex + 1));
+    deck.addEventListener("scroll", syncIndexFromScroll, { passive: true });
+    window.addEventListener("resize", () => goTo(slideIndex));
   }
 </script>
 </body>
