@@ -40,6 +40,48 @@
     }
     .scoreList{margin:0;padding-left:18px;color:#45587d;line-height:1.55}
     .scoreList li{margin-bottom:5px}
+    .deckWrap{position:relative}
+    .deckViewport{
+      display:flex;
+      gap:12px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      padding-bottom:6px;
+      scrollbar-width:thin;
+    }
+    .deckSlide{
+      min-width:100%;
+      scroll-snap-align:start;
+      background:rgba(255,255,255,.9);
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 10px 24px rgba(21,42,84,.08);
+    }
+    .deckSlide img{display:block;width:100%;height:auto}
+    .deckSlide figcaption{
+      padding:10px 12px;
+      color:#445d87;
+      font-size:13px;
+      border-top:1px solid rgba(18,33,66,.09);
+      background:#f7faff;
+    }
+    .deckControls{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      margin-bottom:8px;
+    }
+    .deckBtn{
+      border:1px solid rgba(30,57,104,.18);
+      background:#fff;
+      color:#2b4576;
+      border-radius:10px;
+      padding:6px 10px;
+      cursor:pointer;
+      font-size:13px;
+    }
+    .deckBtn:hover{background:#f1f6ff}
     .tableWrap{overflow-x:auto}
     table{width:100%;border-collapse:collapse;background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:12px;overflow:hidden}
     th,td{padding:10px;border-bottom:1px solid rgba(18,33,66,.09);text-align:left;font-size:14px}
@@ -127,6 +169,38 @@
         <ul class="scoreList">
           <li>+5 Comms open rate &lt; 60%</li>
         </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Scope &amp; Structure at a Glance</h2>
+    <div class="deckWrap">
+      <div class="deckControls">
+        <button class="deckBtn" id="deckPrev" type="button" aria-label="Previous slide">Previous</button>
+        <button class="deckBtn" id="deckNext" type="button" aria-label="Next slide">Next</button>
+      </div>
+      <div class="deckViewport" id="deckViewport">
+        <figure class="deckSlide">
+          <img src="../assets/projects/change-adoption-pulse/slides/1.png" alt="Scope slide 1">
+          <figcaption>Slide 1 of 5</figcaption>
+        </figure>
+        <figure class="deckSlide">
+          <img src="../assets/projects/change-adoption-pulse/slides/2.png" alt="Scope slide 2">
+          <figcaption>Slide 2 of 5</figcaption>
+        </figure>
+        <figure class="deckSlide">
+          <img src="../assets/projects/change-adoption-pulse/slides/3.png" alt="Scope slide 3">
+          <figcaption>Slide 3 of 5</figcaption>
+        </figure>
+        <figure class="deckSlide">
+          <img src="../assets/projects/change-adoption-pulse/slides/4.png" alt="Scope slide 4">
+          <figcaption>Slide 4 of 5</figcaption>
+        </figure>
+        <figure class="deckSlide">
+          <img src="../assets/projects/change-adoption-pulse/slides/5.png" alt="Scope slide 5">
+          <figcaption>Slide 5 of 5</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -325,6 +399,18 @@
     .catch(() => {
       document.getElementById("kpis").innerHTML = '<div class="kpi"><b>Error</b><span>CSV could not be loaded.</span></div>';
     });
+
+  const deck = document.getElementById("deckViewport");
+  const prev = document.getElementById("deckPrev");
+  const next = document.getElementById("deckNext");
+  if (deck && prev && next) {
+    const move = (dir) => {
+      const step = deck.clientWidth;
+      deck.scrollBy({ left: dir * step, behavior: "smooth" });
+    };
+    prev.addEventListener("click", () => move(-1));
+    next.addEventListener("click", () => move(1));
+  }
 </script>
 </body>
 </html>
