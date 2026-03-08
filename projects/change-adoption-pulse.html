@@ -342,8 +342,23 @@
 
   function fmt(v){ return Number(v).toFixed(1); }
 
-  fetch("../assets/projects/change-adoption-pulse/change_adoption_pulse.csv")
-    .then(r => r.text())
+  async function loadCsvText(){
+    const candidates = [
+      "../assets/projects/change-adoption-pulse/change_adoption_pulse.csv",
+      "/assets/projects/change-adoption-pulse/change_adoption_pulse.csv"
+    ];
+    for (const url of candidates){
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (res.ok) return await res.text();
+      } catch (e) {
+        // Try next candidate path.
+      }
+    }
+    throw new Error("CSV could not be loaded from known paths.");
+  }
+
+  loadCsvText()
     .then(text => {
       const rows = parseCsv(text);
       const enriched = rows.map(r => {
@@ -400,8 +415,8 @@
         `;
       }).join("");
     })
-    .catch(() => {
-      document.getElementById("kpis").innerHTML = '<div class="kpi"><b>Error</b><span>CSV could not be loaded.</span></div>';
+    .catch((err) => {
+      document.getElementById("kpis").innerHTML = `<div class="kpi"><b>Error</b><span>${(err && err.message) ? err.message : "CSV could not be loaded."}</span></div>`;
     });
 
   const deck = document.getElementById("deckViewport");
