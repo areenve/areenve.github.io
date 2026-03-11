@@ -27,27 +27,35 @@
     .formula h3{margin:0}
     .formula p{margin:0}
     .scoreLabel{
-      display:inline-block;
-      width:fit-content;
-      padding:4px 10px;
-      border-radius:999px;
-      border:1px solid rgba(29,56,102,.15);
-      background:#f2f7ff;
-      font-size:13px;
-      font-weight:700;
-      color:#2d4b80;
-      letter-spacing:.01em;
-      text-transform:none;
+      display:block;
+      font-size:44px;
+      font-weight:800;
+      line-height:1.05;
+      letter-spacing:-.02em;
+      color:#1f3158;
+      margin-bottom:2px;
     }
     .formula h3{
-      font-size:44px;
-      line-height:1.08;
-      letter-spacing:-.01em;
-      margin:2px 0 6px;
-      color:#1f3158;
+      font-size:26px;
+      line-height:1.2;
+      letter-spacing:-.005em;
+      margin:0 0 6px;
+      color:#33486f;
     }
     .scoreList{margin:0;padding-left:18px;color:#45587d;line-height:1.55}
     .scoreList li{margin-bottom:5px}
+    .formulaEq{
+      margin:2px 0 2px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(30,57,104,.18);
+      background:#f6f9ff;
+      color:#1e335f;
+      font-size:18px;
+      font-weight:700;
+      overflow-x:auto;
+      white-space:nowrap;
+    }
     .deckWrap{position:relative}
     .deckViewport{
       display:flex;
@@ -153,11 +161,13 @@
           <li>Training (15%)</li>
           <li>Manager Briefing (10%)</li>
         </ul>
+        <div class="formulaEq">Readiness<sub>0–100</sub> = 0.20A + 0.20U + 0.20C + 0.15B + 0.15T + 0.10M</div>
         <p class="muted">Survey scores are normalized from 1-5 to 0-100 for consistent scoring.</p>
       </div>
       <div class="formula">
         <span class="scoreLabel">Adoption Risk Score (0–100)</span>
         <h3>Higher score = higher adoption risk</h3>
+        <div class="formulaEq">Risk<sub>0–100</sub> = (RawRisk / 65) × 100</div>
         <p class="muted"><b>Enablement gaps</b></p>
         <ul class="scoreList">
           <li>+15 Training &lt; 70%</li>
@@ -356,16 +366,16 @@
   }
 
   function adoptionRiskScore(r){
-    let score = 0;
-    if (toNumber(r["training_completion_pct (0-100)"]) < 70) score += 15;
-    if (toNumber(r["confidence_score (1-5)"]) < 3.0) score += 10;
-    if (toNumber(r["resistance_signal_score (1-5, higher = worse)"]) > 3.5) score += 10;
-    if (r["milestone_status (On Track / At Risk / Delayed)"] === "Delayed") score += 10;
-    if (toNumber(r["comms_open_rate_pct (0-100)"]) < 60) score += 5;
-    if (toNumber(r["open_issues"]) >= 4) score += 5;
-    if (toNumber(r["open_risks"]) >= 3) score += 5;
-    if (toNumber(r["perceived_benefit_score (1-5)"]) < 3.0) score += 5;
-    return Math.min(score, 100);
+    let rawRisk = 0;
+    if (toNumber(r["training_completion_pct (0-100)"]) < 70) rawRisk += 15;
+    if (toNumber(r["confidence_score (1-5)"]) < 3.0) rawRisk += 10;
+    if (toNumber(r["resistance_signal_score (1-5, higher = worse)"]) > 3.5) rawRisk += 10;
+    if (r["milestone_status (On Track / At Risk / Delayed)"] === "Delayed") rawRisk += 10;
+    if (toNumber(r["comms_open_rate_pct (0-100)"]) < 60) rawRisk += 5;
+    if (toNumber(r["open_issues"]) >= 4) rawRisk += 5;
+    if (toNumber(r["open_risks"]) >= 3) rawRisk += 5;
+    if (toNumber(r["perceived_benefit_score (1-5)"]) < 3.0) rawRisk += 5;
+    return (rawRisk / 65) * 100;
   }
 
   function riskBand(score){
