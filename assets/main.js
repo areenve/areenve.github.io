@@ -84,9 +84,9 @@
 
     const proofMap = {
       core: {
-        text: "I prove this through robust Python/SQL workflows and reproducible modeling pipelines.",
-        link1: { label: "Market Inefficiency Finder", href: "projects/market-inefficiencies-pipeline.html" },
-        link2: { label: "Multifractal Forecasting", href: "projects/fractal-vol-forecast.html" }
+        text: "I prove this through reproducible Python, SQL, and R workflows that turn raw data into usable project outputs.",
+        link1: { label: "NHANES Screening Demo", href: "projects/nhanes-diabetes-screening.html" },
+        link2: { label: "AMZN BigQuery Forecast", href: "projects/amzn-bq-arima-forecast.html" }
       },
       bi: {
         text: "I prove this through dashboard modeling, KPI design, and traceable scoring frameworks for risk and readiness.",
@@ -94,14 +94,14 @@
         link2: { label: "Change Adoption Pulse", href: "projects/change-adoption-pulse.html" }
       },
       markets: {
-        text: "I prove this by quantifying market frictions/dislocations and communicating risk behavior with stress views.",
-        link1: { label: "Market Inefficiency Finder", href: "projects/market-inefficiencies-pipeline.html" },
-        link2: { label: "Portfolio Risk Dashboard", href: "projects/portfolio-risk-dashboard.html" }
+        text: "I prove this by applying analytics across domains: health screening, operational reporting, public-sector change, and risk communication.",
+        link1: { label: "NHANES Screening Demo", href: "projects/nhanes-diabetes-screening.html" },
+        link2: { label: "Change Adoption Pulse", href: "projects/change-adoption-pulse.html" }
       },
       rigor: {
         text: "I prove this with strong baselines, out-of-sample testing, and horizon-by-horizon evaluation.",
-        link1: { label: "Multifractal Forecasting", href: "projects/fractal-vol-forecast.html" },
-        link2: { label: "Market Inefficiency Finder", href: "projects/market-inefficiencies-pipeline.html" }
+        link1: { label: "NHANES Screening Demo", href: "projects/nhanes-diabetes-screening.html" },
+        link2: { label: "AMZN BigQuery Forecast", href: "projects/amzn-bq-arima-forecast.html" }
       },
       communication: {
         text: "I prove this by turning metrics into stakeholder-facing narratives: readiness status, risk bands, and clear next actions.",
