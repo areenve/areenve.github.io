@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>NHANES Diabetes Screening Analysis Report · Arina</title>
+  <link rel="stylesheet" href="../assets/style.css?v=30"/>
+  <style>
+    .content{max-width:980px}
+    .reportGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+    .metricCard{
+      background:rgba(255,255,255,.86);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      box-shadow:0 10px 24px rgba(21,42,84,.08);
+    }
+    .metricCard b{display:block;font-size:22px;line-height:1.1;color:#16203c}
+    .metricCard span{display:block;color:var(--muted);font-size:12px;line-height:1.35;margin-top:4px}
+    .reportCard{
+      background:rgba(255,255,255,.86);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow:0 12px 28px rgba(22,43,83,.1);
+      margin-top:14px;
+    }
+    .reportCard h3{margin:0 0 8px;color:#203762}
+    .reportCard p{color:var(--muted);margin:0 0 10px}
+    .reportCard ul{color:var(--muted);line-height:1.7;margin-bottom:0}
+    .reportTableWrap{overflow-x:auto;margin-top:12px}
+    .reportTable{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius:14px;
+      border:1px solid rgba(31,57,105,.14);
+      background:#fff;
+    }
+    .reportTable th,.reportTable td{
+      padding:11px 12px;
+      border-bottom:1px solid rgba(31,57,105,.1);
+      text-align:left;
+      color:#33476f;
+      font-size:14px;
+    }
+    .reportTable th{
+      background:#f5f8ff;
+      color:#243b68;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+    .reportTable tr:last-child td{border-bottom:0}
+    .codeLine{
+      display:block;
+      overflow-x:auto;
+      white-space:nowrap;
+      background:#f7faff;
+      border:1px solid rgba(31,57,105,.14);
+      border-radius:12px;
+      padding:12px 14px;
+      color:#17233f;
+      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size:13px;
+      margin-top:10px;
+    }
+    .tocLinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .tocLinks a{
+      border:1px solid rgba(32,56,102,.16);
+      background:rgba(255,255,255,.86);
+      color:#2f3f62;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12px;
+    }
+    .note{
+      border-left:4px solid #315aa6;
+      background:rgba(255,255,255,.72);
+      padding:12px 14px;
+      border-radius:12px;
+      color:var(--muted);
+      margin-top:12px;
+    }
+    @media (max-width:900px){.reportGrid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.reportGrid{grid-template-columns:1fr}}
+  </style>
+</head>
+
+<body>
+<header class="nav">
+  <a class="brand" href="../index.html">Arina</a>
+  <nav class="links">
+    <a href="../index.html">Home</a>
+    <a class="active" href="../projects.html">Projects</a>
+    <a href="../experience.html">Experience</a>
+    <a href="../resume.html">Resume</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="container content">
+  <section class="section">
+    <h1>NHANES Diabetes Screening Analysis Report</h1>
+    <p class="subtitle">Merged project report from the EDA, target definition, baseline modeling, feature engineering, tuning, and threshold-selection analyses.</p>
+    <div class="cta">
+      <a class="btn" href="nhanes-diabetes-screening.html">Project Page</a>
+      <a class="btn" href="https://github.com/areenve/diabetes-screening-nhanes" target="_blank" rel="noreferrer">GitHub Repo</a>
+      <a class="btn ghost" href="../projects.html">Back</a>
+    </div>
+    <p class="lead">
+      This page combines the project analysis reports into one clean portfolio view. Quarto/YAML report headers are intentionally omitted so the report reads as a single case study.
+    </p>
+    <div class="tocLinks" aria-label="Report sections">
+      <a href="#overview">Overview</a>
+      <a href="#target">Target</a>
+      <a href="#baseline">Baseline</a>
+      <a href="#features">Feature Engineering</a>
+      <a href="#threshold">Threshold</a>
+      <a href="#takeaways">Takeaways</a>
+    </div>
+    <div class="reportGrid">
+      <div class="metricCard"><b>9,232</b><span>Initial adult NHANES sample</span></div>
+      <div class="metricCard"><b>284</b><span>Undiagnosed diabetes cases</span></div>
+      <div class="metricCard"><b>0.704</b><span>Baseline logistic ROC AUC</span></div>
+      <div class="metricCard"><b>0.03</b><span>Selected screening threshold</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="overview">
+    <h2>1. Overview and EDA</h2>
+    <div class="reportCard">
+      <h3>Clinical Question</h3>
+      <p>Can non-laboratory primary care variables identify individuals with likely diabetes?</p>
+      <p>The analysis uses NHANES 2017-March 2020 pre-pandemic cycles and includes adults aged 20 and older.</p>
+      <div class="reportTableWrap">
+        <table class="reportTable">
+          <thead>
+            <tr><th>EDA Result</th><th>Value</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Initial sample size</td><td>9,232</td><td>Adults in the early analytic dataset.</td></tr>
+            <tr><td>Unweighted preliminary diabetes prevalence</td><td>14.5%</td><td>Overstates population burden because NHANES oversamples higher-risk groups.</td></tr>
+            <tr><td>Survey-weighted preliminary diabetes prevalence</td><td>10.3%</td><td>Better reflects the US population estimate.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">Missingness was substantial and structured, so complete-case modeling was used for the baseline screening predictors.</div>
+    </div>
+  </section>
+
+  <section class="section" id="target">
+    <h2>2. Target Definition</h2>
+    <div class="reportCard">
+      <h3>Undiagnosed Diabetes</h3>
+      <p>The project defines undiagnosed diabetes as clinically elevated HbA1c without existing diagnosis or medication treatment.</p>
+      <ul>
+        <li>HbA1c &gt;= 6.5%</li>
+        <li>No self-reported diabetes diagnosis</li>
+        <li>Not taking diabetes medication</li>
+      </ul>
+      <div class="reportTableWrap">
+        <table class="reportTable">
+          <thead>
+            <tr><th>Target Result</th><th>Value</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Analytic target sample size</td><td>8,081</td></tr>
+            <tr><td>Not undiagnosed diabetes</td><td>7,797</td></tr>
+            <tr><td>Undiagnosed diabetes</td><td>284</td></tr>
+            <tr><td>Survey-weighted undiagnosed prevalence</td><td>2.4% (SE = 0.0019)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="baseline">
+    <h2>3. Baseline Modeling</h2>
+    <div class="reportCard">
+      <h3>Model Setup</h3>
+      <p>The baseline model is a logistic regression using simple non-laboratory predictors.</p>
+      <code class="codeLine">undx_dm ~ RIDAGEYR + RIAGENDR + BMXBMI + BMXWAIST + INDFMPIR</code>
+      <div class="reportTableWrap">
+        <table class="reportTable">
+          <thead>
+            <tr><th>Model</th><th>ROC AUC</th><th>PR AUC</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Logistic regression</td><td>0.704</td><td>0.062</td><td>Best simple baseline; interpretable for screening.</td></tr>
+            <tr><td>Rule-based baseline</td><td>0.653</td><td>-</td><td>BMI &gt; 30 and age &gt; 45.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>The logistic model outperformed the simple clinical rule, showing value in combining multiple predictors.</p>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h2>4. Feature Engineering and Model Comparison</h2>
+    <div class="reportCard">
+      <h3>Feature Engineering</h3>
+      <p>Engineered features were designed to capture clinical risk structure that raw variables may miss.</p>
+      <ul>
+        <li>Age groups such as 20-39, 40-59, and 60+</li>
+        <li>BMI categories such as normal/underweight, overweight, and obese</li>
+        <li>Waist-risk indicators using sex-specific cutoffs</li>
+        <li>Income-risk and age/BMI interaction indicators</li>
+      </ul>
+      <div class="reportTableWrap">
+        <table class="reportTable">
+          <thead>
+            <tr><th>Model</th><th>ROC AUC</th><th>PR AUC</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Logistic regression</td><td>0.704</td><td>0.0620</td><td>Strongest practical model.</td></tr>
+            <tr><td>Random forest</td><td>0.660</td><td>0.0542</td><td>Improved with features, but below logistic regression.</td></tr>
+            <tr><td>XGBoost baseline</td><td>0.661</td><td>0.0502</td><td>More complex, but not better.</td></tr>
+            <tr><td>Tuned XGBoost</td><td>~0.70</td><td>~0.05-0.06</td><td>Similar to logistic regression after tuning.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note">Key insight: the available signal appears largely linear, so model complexity did not materially outperform logistic regression.</div>
+    </div>
+  </section>
+
+  <section class="section" id="threshold">
+    <h2>5. Threshold Selection</h2>
+    <div class="reportCard">
+      <h3>Screening Threshold</h3>
+      <p>Because undiagnosed diabetes is rare, the default 0.50 threshold is not appropriate for screening. Lower thresholds were compared to prioritize sensitivity.</p>
+      <div class="reportTableWrap">
+        <table class="reportTable">
+          <thead>
+            <tr><th>Threshold</th><th>Sensitivity</th><th>Specificity</th><th>Screening Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0.03</td><td>0.859</td><td>0.472</td><td>Selected; catches most potential undiagnosed cases.</td></tr>
+            <tr><td>0.05</td><td>0.453</td><td>0.800</td><td>More conservative; misses more cases.</td></tr>
+            <tr><td>0.07</td><td>0.188</td><td>0.925</td><td>Too conservative for screening.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A threshold of 0.03 was selected because missing true undiagnosed diabetes cases is more costly than sending additional people for confirmatory HbA1c follow-up.</p>
+    </div>
+  </section>
+
+  <section class="section" id="takeaways">
+    <h2>6. Final Takeaways</h2>
+    <div class="reportCard">
+      <ul>
+        <li>Undiagnosed diabetes is a rare outcome, so PR AUC and threshold behavior matter alongside ROC AUC.</li>
+        <li>Logistic regression remained the best practical model because it performed well and is easy to explain.</li>
+        <li>Tree-based models and tuning did not materially improve performance.</li>
+        <li>The selected 0.03 threshold turns predicted probabilities into a screening-oriented decision rule.</li>
+        <li>The Shiny app intentionally uses non-laboratory inputs only; HbA1c is used for target definition and follow-up, not as a model feature.</li>
+      </ul>
+      <div class="note">Educational only: this report and app are screening demonstrations, not diagnostic medical tools.</div>
+    </div>
+  </section>
+
+  <footer class="footer">© <span id="year"></span> Arina Veprikova</footer>
+</main>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>
